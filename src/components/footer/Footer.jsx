@@ -1,9 +1,9 @@
-
+import './../../../src/components/footer/Footer.css'
 
 export function Footer() {
     return (
-        <footer>
+        <div className="forum-footer">
             Footer &copy; 2021
-        </footer>
+        </div>
     )
 }

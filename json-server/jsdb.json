@@ -15,6 +15,83 @@
             "username": "user3",
             "password": "password"
         }
+    ],
+    "categories": [
+        {
+            "key": "general",
+            "name": "General"
+        },
+        {
+            "key": "localized",
+            "name": "Localized"
+        },
+        {
+            "key": "misc",
+            "name": "Misc"
+        }
+    ],
+    "topics": [
+        {
+            "parent": "General",
+            "key": "rules-and-regulations",
+            "name": "Rules & Regulations"
+        },
+        {
+            "parent": "General",
+            "key": "problem-reporting",
+            "name": "Problem Reporting"
+        },
+        {
+            "parent": "General",
+            "key": "suggestions",
+            "name": "Suggestions"
+        },
+        {
+            "parent": "Localized",
+            "key": "bg",
+            "name": "Bulgarian"
+        },
+        {
+            "parent": "Localized",
+            "key": "fr",
+            "name": "French"
+        },
+        {
+            "parent": "Localized",
+            "key": "ru",
+            "name": "Russian"
+        },
+        {
+            "parent": "Localized",
+            "key": "it",
+            "name": "Italian"
+        },
+        {
+            "parent": "Localized",
+            "key": "de",
+            "name": "German"
+        },
+        {
+            "parent": "Misc",
+            "key": "off-topic-discussions",
+            "name": "Off-topic discussions"
+        }
+    ],
+    "threads": [
+        {
+            "uuid": "00000000-0000-0000-0000-000000000001",
+            "parent": "rules-and-regulations",
+            "name": "Forum Rules"
+        },
+        {
+            "uuid": "00000000-0000-0000-0000-000000000002",
+            "parent": "rules-and-regulations",
+            "name": "How to correctly open a thread"
+        },
+        {
+            "uuid": "00000000-0000-0000-0000-000000000003",
+            "parent": "de",
+            "name": "Wilkommen"
+        }   
     ]
-    
 }
