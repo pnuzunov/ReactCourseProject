@@ -9,6 +9,7 @@ export function ThreadList(props) {
     useEffect(_ => {
         getThreadsByTopic(props.match.params.topic).then(response => {
             setThreads(response);
+            //console.log(response);
         })
     }, [props.match.params.topic]);
 

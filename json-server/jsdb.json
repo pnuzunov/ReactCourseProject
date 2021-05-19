@@ -1,96 +1,114 @@
 {
     "users": [
         {
+            "uuid": "05677439-4b21-4042-a857-d824d908311c",
             "name": "User1",
+            "admin": true,
             "username": "user1",
             "password": "password"
         },
         {
+            "uuid": "cb96a296-f967-4760-8544-ce87144ac181",
             "name": "User2",
+            "admin": false,
             "username": "user2",
             "password": "password"
         },
         {
+            "uuid": "7389a945-0615-4adb-8692-55443a97e9f3",
             "name": "User3",
+            "admin": false,
             "username": "user3",
             "password": "password"
         }
     ],
     "categories": [
         {
+            "uuid": "9fe476d4-502b-414b-8894-564cd8d4e6bd",
             "key": "general",
             "name": "General"
         },
         {
+            "uuid": "13484baf-dacb-4e3d-82a1-837abe3b2074",
             "key": "localized",
             "name": "Localized"
         },
         {
+            "uuid": "b6e198d4-40a8-4470-8e5e-8065bf3d649d",
             "key": "misc",
             "name": "Misc"
         }
     ],
     "topics": [
         {
-            "parent": "General",
+            "uuid": "081f299b-9949-4b5c-8397-6c11262a718e",
+            "parent": "9fe476d4-502b-414b-8894-564cd8d4e6bd",
             "key": "rules-and-regulations",
             "name": "Rules & Regulations"
         },
         {
-            "parent": "General",
+            "uuid": "01fe74c3-e460-40ef-9512-ccf01b81b57f",
+            "parent": "9fe476d4-502b-414b-8894-564cd8d4e6bd",
             "key": "problem-reporting",
             "name": "Problem Reporting"
         },
         {
-            "parent": "General",
+            "uuid": "0e9f4c82-f173-4302-aeeb-c2395b7d7423",
+            "parent": "9fe476d4-502b-414b-8894-564cd8d4e6bd",
             "key": "suggestions",
             "name": "Suggestions"
         },
         {
-            "parent": "Localized",
+            "uuid": "e5b0da2c-526c-4c0a-b39c-6646870bf7c2",
+            "parent": "13484baf-dacb-4e3d-82a1-837abe3b2074",
             "key": "bg",
             "name": "Bulgarian"
         },
         {
-            "parent": "Localized",
+            "uuid": "96f82137-c514-4c1b-aa7f-35757d1e9561",
+            "parent": "13484baf-dacb-4e3d-82a1-837abe3b2074",
             "key": "fr",
             "name": "French"
         },
         {
-            "parent": "Localized",
+            "uuid": "826a9ce7-e905-4094-912a-f9c697fc2cd7",
+            "parent": "13484baf-dacb-4e3d-82a1-837abe3b2074",
             "key": "ru",
             "name": "Russian"
         },
         {
-            "parent": "Localized",
+            "uuid": "c4d6c72f-a631-4295-b11c-41e5e2325596",
+            "parent": "13484baf-dacb-4e3d-82a1-837abe3b2074",
             "key": "it",
             "name": "Italian"
         },
         {
-            "parent": "Localized",
+            "uuid": "8d7b7367-2443-4dee-99da-e43d628b044e",
+            "parent": "13484baf-dacb-4e3d-82a1-837abe3b2074",
             "key": "de",
             "name": "German"
         },
         {
-            "parent": "Misc",
+            "uuid": "59aa4851-a93f-42a8-97d0-54353a3619a2",
+            "parent": "b6e198d4-40a8-4470-8e5e-8065bf3d649d",
             "key": "off-topic-discussions",
             "name": "Off-topic discussions"
         }
     ],
     "threads": [
         {
-            "uuid": "00000000-0000-0000-0000-000000000001",
-            "parent": "rules-and-regulations",
+            "uuid": "963881d8-048d-43d4-a8e1-133da3a8d360",
+            "parent": "081f299b-9949-4b5c-8397-6c11262a718e",
             "name": "Forum Rules"
         },
         {
-            "uuid": "00000000-0000-0000-0000-000000000002",
-            "parent": "rules-and-regulations",
+            "uuid": "78e39360-0c74-4507-b9d6-22c35c55f43d",
+            "parent": "081f299b-9949-4b5c-8397-6c11262a718e",
             "name": "How to correctly open a thread"
         },
         {
-            "uuid": "00000000-0000-0000-0000-000000000003",
-            "parent": "de",
+            "uuid": "2e6fac7d-f79c-47ad-bfde-059a2b567b24",
+            "parent": "8d7b7367-2443-4dee-99da-e43d628b044e",
             "name": "Wilkommen"
         }   
     ]

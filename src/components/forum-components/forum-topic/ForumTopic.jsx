@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 
-export function ForumTopic({ categoryKey, name, link }) {
+export function ForumTopic({ categoryUuid, name, link }) {
     return (
         <div>
-            <Link to={`/${categoryKey}/${link}`}>{name}</Link>
+            <Link to={`/${categoryUuid}/${link}`}>{name}</Link>
         </div>
     )
 }

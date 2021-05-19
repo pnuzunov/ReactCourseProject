@@ -20,12 +20,12 @@ export function ForumSummary() {
 
     var topicsMapped = [];
     categories.forEach(element => {
-        topicsMapped[element.name] = topics.filter(t => t.parent === element.name);
+        topicsMapped[element.name] = topics.filter(t => t.parent === element.uuid);
     });
 
     return ( 
         <div>
-            {categories.map(category => <ForumCategory categoryKey={category.key} name={category.name} topics={topicsMapped[category.name]} key={category.name}></ForumCategory> )}
+            {categories.map(category => <ForumCategory categoryUuid={category.uuid} name={category.name} topics={topicsMapped[category.name]} key={category.name}></ForumCategory> )}
         </div>
     )
 }
