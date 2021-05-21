@@ -99,17 +99,43 @@
         {
             "uuid": "963881d8-048d-43d4-a8e1-133da3a8d360",
             "parent": "081f299b-9949-4b5c-8397-6c11262a718e",
+            "createdBy": "05677439-4b21-4042-a857-d824d908311c",
             "name": "Forum Rules"
         },
         {
             "uuid": "78e39360-0c74-4507-b9d6-22c35c55f43d",
             "parent": "081f299b-9949-4b5c-8397-6c11262a718e",
+            "createdBy": "05677439-4b21-4042-a857-d824d908311c",
             "name": "How to correctly open a thread"
         },
         {
             "uuid": "2e6fac7d-f79c-47ad-bfde-059a2b567b24",
             "parent": "8d7b7367-2443-4dee-99da-e43d628b044e",
+            "createdBy": "cb96a296-f967-4760-8544-ce87144ac181",
             "name": "Wilkommen"
         }   
+    ],
+    "threadPosts": [
+        {
+            "uuid": "1",
+            "parent": "963881d8-048d-43d4-a8e1-133da3a8d360",
+            "postedBy": "05677439-4b21-4042-a857-d824d908311c",
+            "content": "First post",
+            "postOrder": 0
+        },
+        {
+            "uuid": "2",
+            "parent": "963881d8-048d-43d4-a8e1-133da3a8d360",
+            "postedBy": "7389a945-0615-4adb-8692-55443a97e9f3",
+            "content": "Second post",
+            "postOrder": 1
+        },
+        {
+            "uuid": "3",
+            "parent": "2e6fac7d-f79c-47ad-bfde-059a2b567b24",
+            "postedBy": "7389a945-0615-4adb-8692-55443a97e9f3",
+            "content": "Some other post",
+            "postOrder": 0
+        }
     ]
 }

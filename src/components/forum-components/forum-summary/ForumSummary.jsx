@@ -25,7 +25,7 @@ export function ForumSummary() {
 
     return ( 
         <div>
-            {categories.map(category => <ForumCategory categoryUuid={category.uuid} name={category.name} topics={topicsMapped[category.name]} key={category.name}></ForumCategory> )}
+            {categories.map(category => <ForumCategory categoryUuid={category.uuid} name={category.name} topics={topicsMapped[category.name]} key={category.uuid}></ForumCategory> )}
         </div>
     )
 }
