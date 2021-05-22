@@ -30,6 +30,7 @@ export function Thread(props) {
 
         getThread(thread).then(data => {
             setCurrentThread(data);
+            console.log(data);
         })
 
     }, [props.match.params.thread])
@@ -43,7 +44,9 @@ export function Thread(props) {
                 <ThreadPost key={tp.uuid} loggedUser={loggedUser} user={users.find(user => user.uuid === tp.postedBy)} threadPost={tp}>
                 </ThreadPost>
             ) }
-            {loggedUser && <Link to="/post">Write a post...</Link>}
+            {loggedUser && currentThread && currentThread.open && <Link to="/post">Write a post...</Link>}
+            {loggedUser && currentThread && !currentThread.open && <p>This thread is closed. You cannot make new posts here.</p>}
+            {!loggedUser && currentThread && currentThread.open && <p>Please <Link to="/login">sign in </Link> to make a new post.</p>}
         </div>
     )
 }

@@ -8,6 +8,10 @@ export function Navigation() {
     const [redirect, setRedirect] = useState(false);
     const [loggedUser, setLoggedUser] = useState(null);
 
+    useEffect(_ => {
+        setLoggedUser(getLoggedUser());
+    }, [])
+
     const onLogout = () => {
         if(getLoggedUser()) {
             logout();
