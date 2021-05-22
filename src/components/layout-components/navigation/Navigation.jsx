@@ -1,22 +1,24 @@
 import { useEffect, useState } from "react";
 import { Redirect } from "react-router";
+import { Link } from "react-router-dom";
 import { getLoggedUser, logout } from "../../../services/AuthService";
 
 export function Navigation() {
 
-    const [loggedUser, setLoggedUser] = useState([]);
     const [redirect, setRedirect] = useState(false);
-
-    useEffect(_ => {
-        setLoggedUser(getLoggedUser());
-    }, []);
+    const [loggedUser, setLoggedUser] = useState(null);
 
     const onLogout = () => {
         if(getLoggedUser()) {
             logout();
+            setLoggedUser(null);
             setRedirect(true);
         }
     }
+
+    document.addEventListener('loggedIn', function() {
+        setLoggedUser(getLoggedUser());
+      });
 
     return (
         <>
@@ -31,16 +33,16 @@ export function Navigation() {
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav mr-auto">
                         <li className="nav-item active">
-                            <a className="nav-link" href="/">Home <span className="sr-only">(current)</span></a>
+                            <Link className="nav-link" to="/">Home</Link>
                         </li>
                         {loggedUser && loggedUser.admin && <li className="nav-item active">
-                            <a className="nav-link" href="/users">Users</a>
+                            <Link className="nav-link" to="/users">Users</Link>
                         </li>}
                         {!loggedUser && <li className="nav-item active">
-                            <a className="nav-link" href="/login">Sign In</a>
+                            <Link className="nav-link" to="/login">Sign In</Link>
                         </li>}
                         {loggedUser && <li className="nav-item active">
-                            <a className="nav-link" href="" onClick={onLogout}>Sign Out</a>
+                            <Link className="nav-link" to="" onClick={onLogout}>Sign Out</Link>
                         </li>}
                         </ul>
                     </div>

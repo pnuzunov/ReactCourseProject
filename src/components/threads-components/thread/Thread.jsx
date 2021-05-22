@@ -1,17 +1,22 @@
 import { useEffect, useState } from "react"
 import { getThread, getThreadPosts } from "../../../services/ForumService";
 import { getInvolvedUsers } from "../../../services/UserService";
+import { getLoggedUser } from "../../../services/AuthService";
 import { ThreadPost } from "../thread-post/ThreadPost";
+import { Link } from "react-router-dom";
 
 export function Thread(props) {
 
-    const [currentThread, setCurrentThread] = useState([]);
+    const [currentThread, setCurrentThread] = useState(null);
     const [threadPosts, setThreadPosts] = useState([]);
     const [users, setUsers] = useState([]);
+    const [loggedUser, setLoggedUser] = useState(null);
 
     useEffect(_ => {
 
         const thread = props.match.params.thread;
+
+        setLoggedUser(getLoggedUser());
 
         getThreadPosts(thread).then(data => {
             setThreadPosts(data);
@@ -27,16 +32,18 @@ export function Thread(props) {
             setCurrentThread(data);
         })
 
-
     }, [props.match.params.thread])
 
     return (
         <div>
-            <h2>{currentThread.name}</h2>
-            {threadPosts.map(tp =>
-                <ThreadPost key={tp.uuid} user={users.find(user => user.uuid === tp.postedBy)?.name} content={tp.content}>
+            <h2>{currentThread && currentThread.name}</h2>
+            {threadPosts
+            .sort((a,b) => a.datePosted > b.datePosted ? 1 : -1)
+            .map(tp =>
+                <ThreadPost key={tp.uuid} loggedUser={loggedUser} user={users.find(user => user.uuid === tp.postedBy)} threadPost={tp}>
                 </ThreadPost>
             ) }
+            {loggedUser && <Link to="/post">Write a post...</Link>}
         </div>
     )
 }

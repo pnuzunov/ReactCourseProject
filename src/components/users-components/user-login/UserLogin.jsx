@@ -22,6 +22,10 @@ export function UserLogin() {
         event.preventDefault();
 
         login(userData).then(_ => {
+
+            const event = new Event('loggedIn');
+            document.dispatchEvent(event);
+
             setRedirect(true);
         })
         .catch(err => setError(err.message));
