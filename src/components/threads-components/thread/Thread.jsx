@@ -30,7 +30,6 @@ export function Thread(props) {
 
         getThread(thread).then(data => {
             setCurrentThread(data);
-            console.log(data);
         })
 
     }, [props.match.params.thread])

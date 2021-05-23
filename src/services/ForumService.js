@@ -42,7 +42,14 @@ export async function getThreadPosts(threadId) {
 export function saveThreadPost(postData) {
     if(postData.id === '') {
         const newUuid = uuidv4();
-        postData.id = newUuid;
+        const now = new Date(Date.now);
+
+        postData = {
+            ...postData,
+            id: newUuid,
+            datePosted: now.toLocaleTimeString()
+        };
+
         console.log(postData);
         return axios.post(`${url}/threadPosts`, postData)
     }
@@ -52,7 +59,9 @@ export function saveThreadPost(postData) {
 export async function saveThread(threadData, firstPost) {
     if(threadData.id === '') {
         const newUuid = uuidv4();
+
         threadData.id = newUuid;
+        
         console.log(threadData);
         firstPost.parent = threadData.id;
         await saveThreadPost(firstPost).then(_ => {

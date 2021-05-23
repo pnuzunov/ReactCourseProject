@@ -24,7 +24,7 @@ function App() {
 
         <Route exact path="/" component={ForumSummary}></Route>
         <Route exact path="/threads/:thread" component={Thread}></Route>
-        <Route exact path="/topics/:category/:topic" component={ThreadList}></Route>
+        <Route exact path="/topics/:topic" component={ThreadList}></Route>
       </Switch>
       <Footer></Footer>
     </div>

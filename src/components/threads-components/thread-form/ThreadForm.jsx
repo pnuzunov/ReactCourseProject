@@ -24,6 +24,7 @@ export function ThreadForm(props) {
         datePosted: '', 
         dateEdited: ''
     });
+    const [error, setError] = useState(null);
     const [redirect, setRedirect] = useState(false);
 
     const loggedUser = getLoggedUser();
@@ -43,18 +44,20 @@ export function ThreadForm(props) {
 
     const onInputChanged = (e) => {
         
-        setCurrentThread( (prevState) => ({
-            ...prevState,
-            createdBy: loggedUser.id,
-            [e.target.name]: e.target.value
-        }))
+        //console.log(e);
 
-        setThreadPost( (prevState) => ({
-            ...prevState,
-            content: currentThread.firstPost,
-            postedBy: loggedUser.id
-        }))
-        delete currentThread.firstPost;
+        if(e.target.name !== 'content')
+            setCurrentThread( (prevState) => ({
+                ...prevState,
+                createdBy: loggedUser.id,
+                [e.target.name]: e.target.value
+            }));
+
+        else 
+            setThreadPost( (prevState) => ({
+                ...prevState,
+                [e.target.name]: e.target.value
+            }));
     }
 
     const onCheckboxChanged = (e) => {
@@ -67,21 +70,25 @@ export function ThreadForm(props) {
     const onFormSubmit = (e) => {
         e.preventDefault();
 
+        if(currentThread.parent === '') {
+            setError({message: 'Please select a category and topic.'});
+            return;
+        }
+
         setCurrentThread( (prevState) => ({
             ...prevState,
             createdBy: loggedUser.id
-        }))
+        }));
 
         saveThread(currentThread, threadPost).then(_ => {
             setRedirect(true);
         });
-
         
     }
     
     return (
         <>
-        {redirect && <Redirect to="/"></Redirect>}
+        {redirect && <Redirect to={`/topics/${currentThread.parent}`}></Redirect>}
         <div className="thread-form-wrapper">           
             <form className="thread-form" onSubmit={onFormSubmit}>
             {/* { error && <span className="text-danger">{error}</span> } */}
@@ -104,8 +111,8 @@ export function ThreadForm(props) {
                         <input type="text" id="name" name="name" className="form-control" onChange={onInputChanged}/>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="firstPost">Post: </label>
-                    <textarea id="firstPost" name="firstPost" className="form-control" required onChange={onInputChanged}/>
+                    <label htmlFor="content">Post: </label>
+                    <textarea id="content" name="content" className="form-control" required onChange={onInputChanged}/>
                 </div>
                 {loggedUser && loggedUser.admin && 
                     <div className="form-group">
@@ -113,6 +120,10 @@ export function ThreadForm(props) {
                         <input type="checkbox" id="open" name="open" className="form-control" defaultChecked onChange={onCheckboxChanged}/>
                     </div>
                 }
+                {error && 
+                <div className="text-danger">
+                    <span>{error.message}</span>
+                </div>}
                 <button className="btn btn-primary">Create</button>
                 <div>
                 </div>                
