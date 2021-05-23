@@ -41,7 +41,7 @@ export function Thread(props) {
             {threadPosts
             .sort((a,b) => a.datePosted > b.datePosted ? 1 : -1)
             .map(tp =>
-                <ThreadPost key={tp.uuid} loggedUser={loggedUser} user={users.find(user => user.uuid === tp.postedBy)} threadPost={tp}>
+                <ThreadPost key={tp.id} loggedUser={loggedUser} user={users.find(user => user.id === tp.postedBy)} threadPost={tp}>
                 </ThreadPost>
             ) }
             {loggedUser && currentThread && currentThread.open && <Link to="/post">Write a post...</Link>}

@@ -10,6 +10,7 @@ import { AuthenticatedRoute } from './guards/AuthenticatedRoute';
 import { NonAuthenticatedRoute } from './guards/NonAuthenticatedRoute';
 import { UserLogin } from './components/users-components/user-login/UserLogin';
 import { Thread } from './components/threads-components/thread/Thread';
+import { ThreadForm } from './components/threads-components/thread-form/ThreadForm';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Navigation></Navigation>
       <Switch>
         <AuthenticatedRoute exact path="/users" component={UsersList} admin="true"></AuthenticatedRoute>
+        <AuthenticatedRoute exact path="/threads/create" component={ThreadForm}></AuthenticatedRoute>
         <NonAuthenticatedRoute exact path="/login" component={UserLogin}></NonAuthenticatedRoute>
 
         <Route exact path="/" component={ForumSummary}></Route>

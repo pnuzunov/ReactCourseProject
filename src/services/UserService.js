@@ -6,8 +6,8 @@ export function getUsers() {
     return axios.get(`${url}`);
 }
 
-export function getUser(uuid) {
-    return axios.get(`${url}/${uuid}`);
+export function getUser(id) {
+    return axios.get(`${url}/${id}`);
 }
 
 export async function getInvolvedUsers(threadPosts) {

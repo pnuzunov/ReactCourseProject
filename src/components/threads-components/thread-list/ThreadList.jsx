@@ -15,7 +15,7 @@ export function ThreadList(props) {
 
     return (
         <div>
-            { threads.map(t => <ThreadListItem key={t.name} uuid={t.uuid} name={t.name}></ThreadListItem> ) }
+            { threads.map(t => <ThreadListItem key={t.name} id={t.id} name={t.name}></ThreadListItem> ) }
         </div>
     )
 }

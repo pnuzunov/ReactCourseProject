@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { getCategories, getTopics } from "../../../services/ForumService";
 import { ForumCategory } from "../forum-category/ForumCategory";
 
@@ -20,12 +21,13 @@ export function ForumSummary() {
 
     var topicsMapped = [];
     categories.forEach(element => {
-        topicsMapped[element.name] = topics.filter(t => t.parent === element.uuid);
+        topicsMapped[element.name] = topics.filter(t => t.parent === element.id);
     });
 
-    return ( 
+    return (
         <div>
-            {categories.map(category => <ForumCategory categoryUuid={category.uuid} name={category.name} topics={topicsMapped[category.name]} key={category.uuid}></ForumCategory> )}
+            <Link className="d-flex" to="/threads/create">Create a thread</Link>
+            {categories.map(category => <ForumCategory categoryId={category.id} name={category.name} topics={topicsMapped[category.name]} key={category.id}></ForumCategory> )}
         </div>
     )
 }
