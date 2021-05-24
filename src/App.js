@@ -20,6 +20,7 @@ function App() {
       <Switch>
         <AuthenticatedRoute exact path="/users" component={UsersList} admin="true"></AuthenticatedRoute>
         <AuthenticatedRoute exact path="/threads/create" component={ThreadForm}></AuthenticatedRoute>
+        <AuthenticatedRoute exact path="/threads/edit/:thread" component={ThreadForm} admin="true"></AuthenticatedRoute>
         <NonAuthenticatedRoute exact path="/login" component={UserLogin}></NonAuthenticatedRoute>
 
         <Route exact path="/" component={ForumSummary}></Route>

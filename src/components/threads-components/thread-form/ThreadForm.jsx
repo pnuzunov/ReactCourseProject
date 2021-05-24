@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { getLoggedUser } from "../../../services/AuthService";
-import { getCategories, getTopics, saveThread } from "../../../services/ForumService";
-import { v4 as uuidv4 } from 'uuid';
+import { getCategories, getCategory, getThread, getThreadsByTopic, getTopics, saveThread } from "../../../services/ForumService";
 import { Redirect } from "react-router";
 
 export function ThreadForm(props) {
@@ -30,13 +29,23 @@ export function ThreadForm(props) {
     const loggedUser = getLoggedUser();
 
     useEffect(_ => {
-        getCategories().then(response => {
-            setCategories(response.data);
-        })
-        getTopics().then(response => {
-            setAllTopics(response.data);
-        })
-    }, []);
+
+        const queries = [];
+        queries.push(getCategories());
+        queries.push(getTopics());
+        if(props.computedMatch.params.thread){
+            queries.push(getThread(props.computedMatch.params.thread));
+        }
+        Promise.all(queries).then((response) => {
+            setCategories(response[0].data);
+            setAllTopics(response[1].data);
+
+            if(props.computedMatch.params.thread) {
+                setCurrentThread(response[2]);
+                setTopics(allTopics.filter(topic => topic.parent === currentThread.category));
+            }
+        });
+    }, [props.computedMatch.params.thread]);
 
     const filterTopics = (e) => {
         setTopics(allTopics.filter(topic => topic.parent === e.target.value));
@@ -44,12 +53,13 @@ export function ThreadForm(props) {
 
     const onInputChanged = (e) => {
         
-        //console.log(e);
-
+        if(e.target.name === 'category') {
+            setTopics(allTopics.filter(topic => topic.parent === e.target.value));
+        }
         if(e.target.name !== 'content')
             setCurrentThread( (prevState) => ({
                 ...prevState,
-                createdBy: loggedUser.id,
+                createdBy: (currentThread.id === '' ? loggedUser.id : currentThread.createdBy),
                 [e.target.name]: e.target.value
             }));
 
@@ -75,11 +85,6 @@ export function ThreadForm(props) {
             return;
         }
 
-        setCurrentThread( (prevState) => ({
-            ...prevState,
-            createdBy: loggedUser.id
-        }));
-
         saveThread(currentThread, threadPost).then(_ => {
             setRedirect(true);
         });
@@ -93,31 +98,31 @@ export function ThreadForm(props) {
             <form className="thread-form" onSubmit={onFormSubmit}>
             {/* { error && <span className="text-danger">{error}</span> } */}
                 <div className="form-group">
-                    <label>Category: </label>
-                    <select onChange={filterTopics} defaultValue="">
+                    <label htmlFor="category">Category: </label>
+                    <select name="category" id="category" onChange={onInputChanged} defaultValue={currentThread.category}>
                         <option hidden disabled value=""></option>
-                        {categories.map(category => <option key={category.id} value={category.id}>{category.name}</option>)}
+                        {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
                     </select>
                 </div>
                 <div className="form-group">
                     <label htmlFor="parent">Topic: </label>
-                    <select name="parent" id="parent" onChange={onInputChanged} defaultValue="">
+                    <select name="parent" id="parent" onChange={onInputChanged} defaultValue={currentThread.parent}>
                         <option hidden disabled value=""></option>
                         {topics.map(topic => <option key={topic.id} value={topic.id}>{topic.name}</option>)}
                     </select>
                 </div>
                 <div className="form-group">
                         <label htmlFor="name">Title: </label>
-                        <input type="text" id="name" name="name" className="form-control" onChange={onInputChanged}/>
+                        <input type="text" id="name" name="name" className="form-control" value={currentThread.name} required onChange={onInputChanged}/>
                 </div>
-                <div className="form-group">
+                {(currentThread.id === '') && <div className="form-group">
                     <label htmlFor="content">Post: </label>
                     <textarea id="content" name="content" className="form-control" required onChange={onInputChanged}/>
-                </div>
+                </div>}
                 {loggedUser && loggedUser.admin && 
                     <div className="form-group">
                         <label htmlFor="open">Open</label>
-                        <input type="checkbox" id="open" name="open" className="form-control" defaultChecked onChange={onCheckboxChanged}/>
+                        <input type="checkbox" id="open" name="open" className="form-control" checked={currentThread.open} onChange={onCheckboxChanged}/>
                     </div>
                 }
                 {error && 

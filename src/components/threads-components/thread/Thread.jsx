@@ -1,38 +1,58 @@
 import { useEffect, useState } from "react"
-import { getThread, getThreadPosts } from "../../../services/ForumService";
-import { getInvolvedUsers } from "../../../services/UserService";
+import { getThread, getThreadPosts, saveThreadPost } from "../../../services/ForumService";
+import { getInvolvedUsers, getUsers } from "../../../services/UserService";
 import { getLoggedUser } from "../../../services/AuthService";
 import { ThreadPost } from "../thread-post/ThreadPost";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 export function Thread(props) {
 
-    const [currentThread, setCurrentThread] = useState(null);
+    const [currentThread, setCurrentThread] = useState({id: '', parent: '', name: ''});
     const [threadPosts, setThreadPosts] = useState([]);
+    const [newThreadPost, setNewThreadPost] = useState({id: '', content: '', parent: '', postedBy: ''});
     const [users, setUsers] = useState([]);
-    const [loggedUser, setLoggedUser] = useState(null);
+
+    const loggedUser = getLoggedUser();  
 
     useEffect(_ => {
 
-        const thread = props.match.params.thread;
+        const queries = [];
 
-        setLoggedUser(getLoggedUser());
+        queries.push(getThread(props.match.params.thread))
+        queries.push(getThreadPosts(props.match.params.thread));
+        queries.push(getUsers());
 
-        getThreadPosts(thread).then(data => {
-            setThreadPosts(data);
-        })
-        .then( _ => {
-            getInvolvedUsers(threadPosts)
-                .then(data => {
-                    setUsers(data);
-                });
-        })
-
-        getThread(thread).then(data => {
-            setCurrentThread(data);
-        })
-
+        Promise.all(queries).then((response) => {
+            setCurrentThread(response[0]);
+            setThreadPosts(response[1]);
+            setUsers(response[2].data);
+            if(loggedUser) setNewThreadPost((prevState) => ({
+                ...prevState,
+                parent: currentThread.id,
+                postedBy: loggedUser.id
+            }))
+        });
     }, [props.match.params.thread])
+
+    const onInputChanged = (e) => {
+        setNewThreadPost((prevState) => ({
+            ...prevState,
+            parent: currentThread.id,
+            content: e.target.value
+        }));
+    }
+
+    const onCreatePost = (e) => {
+        if(e.code === 'Enter') {
+            e.target.value = '';
+            saveThreadPost(newThreadPost).then(_ => {
+                getThreadPosts(currentThread.id).then((data) => {
+                    setThreadPosts(data);
+                })
+            });
+        }
+        
+    }
 
     return (
         <div>
@@ -43,9 +63,14 @@ export function Thread(props) {
                 <ThreadPost key={tp.id} loggedUser={loggedUser} user={users.find(user => user.id === tp.postedBy)} threadPost={tp}>
                 </ThreadPost>
             ) }
-            {loggedUser && currentThread && currentThread.open && <Link to="/post">Write a post...</Link>}
-            {loggedUser && currentThread && !currentThread.open && <p>This thread is closed. You cannot make new posts here.</p>}
+            {loggedUser && currentThread && currentThread.open 
+                &&  <div>
+                        <textarea onChange={onInputChanged} onKeyPress={onCreatePost}>
+
+                        </textarea>
+                    </div> }
+            {currentThread && !currentThread.open && <p>This thread is closed. You cannot make new posts here.</p>}
             {!loggedUser && currentThread && currentThread.open && <p>Please <Link to="/login">sign in </Link> to make a new post.</p>}
-        </div>
+        </div>        
     )
 }

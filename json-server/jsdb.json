@@ -99,6 +99,7 @@
     {
       "id": "963881d8-048d-43d4-a8e1-133da3a8d360",
       "open": false,
+      "category": "9fe476d4-502b-414b-8894-564cd8d4e6bd",
       "parent": "081f299b-9949-4b5c-8397-6c11262a718e",
       "createdBy": "05677439-4b21-4042-a857-d824d908311c",
       "name": "Forum Rules"
@@ -106,6 +107,7 @@
     {
       "id": "78e39360-0c74-4507-b9d6-22c35c55f43d",
       "open": true,
+      "category": "9fe476d4-502b-414b-8894-564cd8d4e6bd",
       "parent": "081f299b-9949-4b5c-8397-6c11262a718e",
       "createdBy": "05677439-4b21-4042-a857-d824d908311c",
       "name": "How to correctly open a thread"
@@ -113,9 +115,18 @@
     {
       "id": "2e6fac7d-f79c-47ad-bfde-059a2b567b24",
       "open": true,
+      "category": "13484baf-dacb-4e3d-82a1-837abe3b2074",
       "parent": "8d7b7367-2443-4dee-99da-e43d628b044e",
-      "createdBy": "cb96a296-f967-4760-8544-ce87144ac181",
-      "name": "Wilkommen"
+      "createdBy": "7389a945-0615-4adb-8692-55443a97e9f3",
+      "name": "Wilkommen!"
+    },
+    {
+      "id": "8e5d17ea-b860-48cc-9343-d0aa529ba111",
+      "open": true,
+      "category": "9fe476d4-502b-414b-8894-564cd8d4e6bd",
+      "name": "testThread",
+      "parent": "081f299b-9949-4b5c-8397-6c11262a718e",
+      "createdBy": "05677439-4b21-4042-a857-d824d908311c"
     }
   ],
   "threadPosts": [
@@ -124,22 +135,29 @@
       "parent": "963881d8-048d-43d4-a8e1-133da3a8d360",
       "postedBy": "05677439-4b21-4042-a857-d824d908311c",
       "content": "First post",
-      "datePosted": "Tue Jun 22 2021 00:20:00 GMT+3",
-      "dateEdited": "Tue Jun 22 2021 00:20:00 GMT+3"
+      "datePosted": "",
+      "dateEdited": ""
     },
     {
       "id": "2",
       "parent": "963881d8-048d-43d4-a8e1-133da3a8d360",
       "postedBy": "7389a945-0615-4adb-8692-55443a97e9f3",
       "content": "Second post",
-      "datePosted": "Tue Jun 22 2021 00:30:00 GMT+3"
+      "datePosted": ""
     },
     {
       "id": "3",
       "parent": "2e6fac7d-f79c-47ad-bfde-059a2b567b24",
       "postedBy": "7389a945-0615-4adb-8692-55443a97e9f3",
       "content": "Some other post",
-      "datePosted": "Tue Jun 22 2021 00:20:00 GMT+3"
+      "datePosted": ""
+    },
+    {
+      "id": "07e5986a-3c1f-451e-86c7-6b341dbc0f6a",
+      "content": "test",
+      "parent": "8e5d17ea-b860-48cc-9343-d0aa529ba111",
+      "postedBy": "05677439-4b21-4042-a857-d824d908311c",
+      "datePosted": "2021-05-24T07:14:35.164Z"
     }
   ]
 }

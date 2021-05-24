@@ -1,5 +1,6 @@
 import { Redirect } from "react-router";
 import { getLoggedUser } from "../services/AuthService.js";
+import { getThread } from "../services/ForumService.js";
 
 export function AuthenticatedRoute(props) {
     const user = getLoggedUser();
