@@ -15,6 +15,7 @@ export function ThreadList(props) {
 
     return (
         <div>
+            {threads.length === 0 && <h4>No threads in this topic.</h4>}
             { threads.map(t => <ThreadListItem key={t.name} id={t.id} name={t.name}></ThreadListItem> ) }
         </div>
     )

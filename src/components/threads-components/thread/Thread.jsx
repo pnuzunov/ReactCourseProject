@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
-import { getThread, getThreadPosts, saveThreadPost } from "../../../services/ForumService";
+import { deleteThread, getThread, getThreadPosts, saveThreadPost } from "../../../services/ForumService";
 import { getUsers } from "../../../services/UserService";
 import { getLoggedUser } from "../../../services/AuthService";
 import { ThreadPost } from "../thread-post/ThreadPost";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 export function Thread(props) {
 
@@ -11,6 +11,7 @@ export function Thread(props) {
     const [threadPosts, setThreadPosts] = useState([]);
     const [newThreadPost, setNewThreadPost] = useState({id: '', content: '', parent: '', postedBy: ''});
     const [users, setUsers] = useState([]);
+    const [redirect, setRedirect] = useState(false);
 
     const loggedUser = getLoggedUser();  
 
@@ -54,10 +55,19 @@ export function Thread(props) {
         
     }
 
+    const onDeleteThread = () => {
+        deleteThread(currentThread.id).then(_ => {
+            setRedirect(true);
+        });
+    }
+
     return (
+        <>
+        {redirect && <Redirect to={`/topics/${currentThread.id}`}></Redirect>}
         <div>
             <h2>{currentThread && currentThread.name}</h2>
             {loggedUser && loggedUser.admin && <Link to={`/threads/edit/${currentThread.id}`}>Edit this thread</Link>}
+            {loggedUser && loggedUser.admin && <Link onClick={onDeleteThread}>Delete this thread</Link>}
             {threadPosts
             .sort((a,b) => a.datePosted > b.datePosted ? 1 : -1)
             .map(tp =>
@@ -72,6 +82,7 @@ export function Thread(props) {
                     </div> }
             {currentThread && !currentThread.open && <p>This thread is closed. You cannot make new posts here.</p>}
             {!loggedUser && currentThread && currentThread.open && <p>Please <Link to="/login">sign in </Link> to make a new post.</p>}
-        </div>        
+        </div>
+        </> 
     )
 }

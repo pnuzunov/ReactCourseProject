@@ -38,7 +38,6 @@ export async function getThreadPosts(threadId) {
 }
 
 
-
 export function saveThreadPost(postData) {
     if(postData.id === '') {
         const newUuid = uuidv4();
@@ -67,4 +66,21 @@ export async function saveThread(threadData, firstPost) {
         });
     }
     else return axios.put(`${url}/threads/${threadData.id}`, threadData);
+}
+
+
+export function deleteThreadPost(postId) {
+    return axios.delete(`${url}/threadPosts/${postId}`);
+}
+
+export async function deleteThread(threadId) {
+    const threadPosts = await getThreadPosts(threadId);
+    const deleteRequests = [];
+    threadPosts.forEach(element => {
+        deleteRequests.push(deleteThreadPost(element.id));
+    });
+    
+    await Promise.all(deleteRequests);
+    
+    return axios.delete(`${url}/threads/${threadId}`);
 }

@@ -121,12 +121,12 @@
       "name": "Wilkommen!"
     },
     {
-      "id": "8e5d17ea-b860-48cc-9343-d0aa529ba111",
+      "id": "74299f5b-a98c-4b3b-8540-9989ced96988",
       "open": true,
-      "category": "9fe476d4-502b-414b-8894-564cd8d4e6bd",
-      "name": "testThread",
+      "name": "test",
       "parent": "01fe74c3-e460-40ef-9512-ccf01b81b57f",
-      "createdBy": "05677439-4b21-4042-a857-d824d908311c"
+      "createdBy": "05677439-4b21-4042-a857-d824d908311c",
+      "category": "9fe476d4-502b-414b-8894-564cd8d4e6bd"
     }
   ],
   "threadPosts": [
@@ -151,13 +151,6 @@
       "postedBy": "7389a945-0615-4adb-8692-55443a97e9f3",
       "content": "Some other post",
       "datePosted": ""
-    },
-    {
-      "id": "07e5986a-3c1f-451e-86c7-6b341dbc0f6a",
-      "content": "test",
-      "parent": "8e5d17ea-b860-48cc-9343-d0aa529ba111",
-      "postedBy": "05677439-4b21-4042-a857-d824d908311c",
-      "datePosted": "2021-05-24T07:14:35.164Z"
     }
   ]
 }
