@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
 import { getThread, getThreadPosts, saveThreadPost } from "../../../services/ForumService";
-import { getInvolvedUsers, getUsers } from "../../../services/UserService";
+import { getUsers } from "../../../services/UserService";
 import { getLoggedUser } from "../../../services/AuthService";
 import { ThreadPost } from "../thread-post/ThreadPost";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export function Thread(props) {
 
@@ -26,13 +26,13 @@ export function Thread(props) {
             setCurrentThread(response[0]);
             setThreadPosts(response[1]);
             setUsers(response[2].data);
-            if(loggedUser) setNewThreadPost((prevState) => ({
+            setNewThreadPost((prevState) => ({
                 ...prevState,
                 parent: currentThread.id,
-                postedBy: loggedUser.id
+                postedBy: loggedUser?.id
             }))
         });
-    }, [props.match.params.thread])
+    }, [currentThread.id, loggedUser?.id, props.match.params.thread])
 
     const onInputChanged = (e) => {
         setNewThreadPost((prevState) => ({
@@ -57,10 +57,11 @@ export function Thread(props) {
     return (
         <div>
             <h2>{currentThread && currentThread.name}</h2>
+            {loggedUser && loggedUser.admin && <Link to={`/threads/edit/${currentThread.id}`}>Edit this thread</Link>}
             {threadPosts
             .sort((a,b) => a.datePosted > b.datePosted ? 1 : -1)
             .map(tp =>
-                <ThreadPost key={tp.id} loggedUser={loggedUser} user={users.find(user => user.id === tp.postedBy)} threadPost={tp}>
+                <ThreadPost key={tp.id} user={users.find(user => user.id === tp.postedBy)} threadPost={tp}>
                 </ThreadPost>
             ) }
             {loggedUser && currentThread && currentThread.open 

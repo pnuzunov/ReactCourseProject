@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { getLoggedUser } from "../../../services/AuthService";
-import { getCategories, getCategory, getThread, getThreadsByTopic, getTopics, saveThread } from "../../../services/ForumService";
+import { getCategories, getThread, getTopics, saveThread } from "../../../services/ForumService";
 import { Redirect } from "react-router";
 
 export function ThreadForm(props) {
@@ -13,7 +13,8 @@ export function ThreadForm(props) {
         open: true,
         name: '', 
         parent: '', 
-        createdBy: ''
+        createdBy: '',
+        category: ''
     });
     const [threadPost, setThreadPost] = useState({
         id: '', 
@@ -41,27 +42,26 @@ export function ThreadForm(props) {
             setAllTopics(response[1].data);
 
             if(props.computedMatch.params.thread) {
-                setCurrentThread(response[2]);
-                setTopics(allTopics.filter(topic => topic.parent === currentThread.category));
+                setCurrentThread({...response[2]});
             }
+            
         });
+        console.log("rendered");
     }, [props.computedMatch.params.thread]);
-
-    const filterTopics = (e) => {
-        setTopics(allTopics.filter(topic => topic.parent === e.target.value));
-    }
 
     const onInputChanged = (e) => {
         
         if(e.target.name === 'category') {
             setTopics(allTopics.filter(topic => topic.parent === e.target.value));
         }
-        if(e.target.name !== 'content')
+        if(e.target.name !== 'content') {
             setCurrentThread( (prevState) => ({
                 ...prevState,
                 createdBy: (currentThread.id === '' ? loggedUser.id : currentThread.createdBy),
                 [e.target.name]: e.target.value
-            }));
+            }));       
+        }
+
 
         else 
             setThreadPost( (prevState) => ({
@@ -99,15 +99,15 @@ export function ThreadForm(props) {
             {/* { error && <span className="text-danger">{error}</span> } */}
                 <div className="form-group">
                     <label htmlFor="category">Category: </label>
-                    <select name="category" id="category" onChange={onInputChanged} defaultValue={currentThread.category}>
-                        <option hidden disabled value=""></option>
+                    <select name="category" id="category" onChange={onInputChanged} value={currentThread.category}>
+                        {/* <option hidden disabled value=""></option> */}
                         {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
                     </select>
                 </div>
                 <div className="form-group">
                     <label htmlFor="parent">Topic: </label>
-                    <select name="parent" id="parent" onChange={onInputChanged} defaultValue={currentThread.parent}>
-                        <option hidden disabled value=""></option>
+                    <select name="parent" id="parent" onChange={onInputChanged} value={currentThread.parent}>
+                        {/* <option hidden disabled value=""></option> */}
                         {topics.map(topic => <option key={topic.id} value={topic.id}>{topic.name}</option>)}
                     </select>
                 </div>

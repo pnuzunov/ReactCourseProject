@@ -1,12 +1,12 @@
 import defaultIcon from "../../../resources/default-user-icon.jpg";
 import "../thread-post/ThreadPost.css";
 
-export function ThreadPost({loggedUser, user, threadPost}) {
+export function ThreadPost({user, threadPost}) {
 
     return (
         <div className="d-flex">
             <div className="user-details-wrapper">
-                <img src={(user && user.image) || defaultIcon} className="user-icon"></img>
+                <img alt="user-img" src={(user && user.image) || defaultIcon} className="user-icon"></img>
                 <h4>{user && user.name}</h4>
                 {(user && user.admin) && <p>Administrator</p>}           
             </div>
