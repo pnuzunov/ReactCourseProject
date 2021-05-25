@@ -1,10 +1,10 @@
+import { Link } from "react-router-dom";
 
 
 export function UserEntry( {user} ) {
     return (
         <div>
-            <p>{user.name}</p>
-            <p>{user.password}</p>
+            <Link to={`/users/edit/${user.id}`}>{user.name}</Link>
         </div>
     )
 }

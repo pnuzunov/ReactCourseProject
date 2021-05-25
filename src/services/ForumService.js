@@ -75,7 +75,7 @@ export function deleteThreadPost(postId) {
 
 export async function deleteThread(threadId) {
     const threadPosts = await getThreadPosts(threadId);
-    console.log(threadPosts);
+
     const deleteRequests = [];
     threadPosts.forEach(element => {
         deleteRequests.push(deleteThreadPost(element.id));

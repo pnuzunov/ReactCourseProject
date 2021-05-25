@@ -11,6 +11,7 @@ import { NonAuthenticatedRoute } from './guards/NonAuthenticatedRoute';
 import { UserLogin } from './components/users-components/user-login/UserLogin';
 import { Thread } from './components/threads-components/thread/Thread';
 import { ThreadForm } from './components/threads-components/thread-form/ThreadForm';
+import { UserForm } from './components/users-components/user-form/UserForm';
 
 function App() {
   return (
@@ -19,6 +20,8 @@ function App() {
       <Navigation></Navigation>
       <Switch>
         <AuthenticatedRoute exact path="/users" component={UsersList} admin="true"></AuthenticatedRoute>
+        <AuthenticatedRoute exact path="/users/edit/:user" component={UserForm} admin="true"></AuthenticatedRoute>
+
         <AuthenticatedRoute exact path="/threads/create" component={ThreadForm}></AuthenticatedRoute>
         <AuthenticatedRoute exact path="/threads/edit/:thread" component={ThreadForm} admin="true"></AuthenticatedRoute>
         <NonAuthenticatedRoute exact path="/login" component={UserLogin}></NonAuthenticatedRoute>

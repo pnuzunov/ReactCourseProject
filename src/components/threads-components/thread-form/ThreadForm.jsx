@@ -43,10 +43,15 @@ export function ThreadForm(props) {
 
             if(props.computedMatch.params.thread) {
                 setCurrentThread({...response[2]});
+                filterTopics(response[1].data, response[2].category);
             }
             
         });
-    }, [props.computedMatch.params.thread]);
+    }, [ props.computedMatch.params.thread]);
+
+    const filterTopics = (all_topics, category) => {
+        setTopics(all_topics.filter(topic => topic.parent === category));
+    }
 
     const onInputChanged = (e) => {
         
@@ -54,7 +59,7 @@ export function ThreadForm(props) {
             setTopics(allTopics.filter(topic => topic.parent === e.target.value));
             setCurrentThread( (prevState) => ({
                 ...prevState,
-                parent: allTopics.filter(topic => topic.parent === e.target.value)[0].id
+                parent: allTopics.filter(topic => topic.parent === e.target.value)[0]?.id
             }));
         }
         if(e.target.name !== 'content') {
@@ -94,17 +99,12 @@ export function ThreadForm(props) {
         });
         
     }
-    
-    const filterTopics = (e) => {
-        console.log(e);
-    }
 
     return (
         <>
         {redirect && <Redirect to={`/topics/${currentThread.parent}`}></Redirect>}
         <div className="thread-form-wrapper">           
             <form className="thread-form" onSubmit={onFormSubmit}>
-            {/* { error && <span className="text-danger">{error}</span> } */}
                 <div className="form-group">
                     <label htmlFor="category">Category: </label>
                     <select name="category" id="category" onChange={onInputChanged} value={currentThread.category}>
