@@ -20,6 +20,7 @@ function App() {
       <Navigation></Navigation>
       <Switch>
         <AuthenticatedRoute exact path="/users" component={UsersList} admin="true"></AuthenticatedRoute>
+        <NonAuthenticatedRoute exact path="/register" component={UserForm}></NonAuthenticatedRoute>
         <AuthenticatedRoute exact path="/users/edit/:user" component={UserForm} admin="true"></AuthenticatedRoute>
 
         <AuthenticatedRoute exact path="/threads/create" component={ThreadForm}></AuthenticatedRoute>

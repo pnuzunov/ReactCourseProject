@@ -2,7 +2,7 @@
   "users": [
     {
       "id": "05677439-4b21-4042-a857-d824d908311c",
-      "name": "User1",
+      "name": "Admin",
       "admin": true,
       "username": "user1",
       "password": "password"
@@ -20,6 +20,13 @@
       "admin": false,
       "username": "user3",
       "password": "password"
+    },
+    {
+      "id": "3572e1e8-8812-4efb-a9f0-7650694847d6",
+      "name": "User4",
+      "username": "user4",
+      "password": "password",
+      "admin": false
     }
   ],
   "categories": [
@@ -119,22 +126,6 @@
       "parent": "8d7b7367-2443-4dee-99da-e43d628b044e",
       "createdBy": "7389a945-0615-4adb-8692-55443a97e9f3",
       "name": "Wilkommen!"
-    },
-    {
-      "id": "40cf1714-75ea-4eb3-95db-f561d884fbaa",
-      "open": true,
-      "name": "test",
-      "parent": "59aa4851-a93f-42a8-97d0-54353a3619a2",
-      "createdBy": "05677439-4b21-4042-a857-d824d908311c",
-      "category": "b6e198d4-40a8-4470-8e5e-8065bf3d649d"
-    },
-    {
-      "id": "7e9b2261-a968-415d-bfc6-7f6b83ebd3ba",
-      "open": true,
-      "name": "test2431",
-      "parent": "59aa4851-a93f-42a8-97d0-54353a3619a2",
-      "createdBy": "7389a945-0615-4adb-8692-55443a97e9f3",
-      "category": "b6e198d4-40a8-4470-8e5e-8065bf3d649d"
     }
   ],
   "threadPosts": [
@@ -159,22 +150,6 @@
       "postedBy": "7389a945-0615-4adb-8692-55443a97e9f3",
       "content": "Some other post",
       "datePosted": ""
-    },
-    {
-      "id": "030e0872-5840-4efd-b0a8-c49921ae9890",
-      "content": "test",
-      "parent": "40cf1714-75ea-4eb3-95db-f561d884fbaa",
-      "postedBy": "05677439-4b21-4042-a857-d824d908311c",
-      "datePosted": "2021-05-25T08:54:01.162Z",
-      "dateEdited": ""
-    },
-    {
-      "id": "d35c68ea-dfcc-4d59-acd5-35b0d43bc512",
-      "content": "r4r2r3qfeaqe",
-      "parent": "7e9b2261-a968-415d-bfc6-7f6b83ebd3ba",
-      "postedBy": "7389a945-0615-4adb-8692-55443a97e9f3",
-      "datePosted": "2021-05-25T09:46:11.046Z",
-      "dateEdited": ""
     }
   ]
 }

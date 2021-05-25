@@ -47,7 +47,7 @@ export function UserLogin() {
                 </div>
                 <button className="btn btn-primary">Sign In</button>
                 <div>
-                    <Link to="/register">Dont have an account yet?</Link>
+                    Or <Link to="/register"> create </Link> a new account
                 </div>                
             </form>
         </div>
