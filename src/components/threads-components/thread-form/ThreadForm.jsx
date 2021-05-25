@@ -46,13 +46,16 @@ export function ThreadForm(props) {
             }
             
         });
-        console.log("rendered");
     }, [props.computedMatch.params.thread]);
 
     const onInputChanged = (e) => {
         
         if(e.target.name === 'category') {
             setTopics(allTopics.filter(topic => topic.parent === e.target.value));
+            setCurrentThread( (prevState) => ({
+                ...prevState,
+                parent: allTopics.filter(topic => topic.parent === e.target.value)[0].id
+            }));
         }
         if(e.target.name !== 'content') {
             setCurrentThread( (prevState) => ({
@@ -63,10 +66,11 @@ export function ThreadForm(props) {
         }
 
 
-        else 
+        else if(e.target.name === 'content')
             setThreadPost( (prevState) => ({
                 ...prevState,
-                [e.target.name]: e.target.value
+                [e.target.name]: e.target.value,
+                postedBy: loggedUser.id
             }));
     }
 
@@ -91,6 +95,10 @@ export function ThreadForm(props) {
         
     }
     
+    const filterTopics = (e) => {
+        console.log(e);
+    }
+
     return (
         <>
         {redirect && <Redirect to={`/topics/${currentThread.parent}`}></Redirect>}
@@ -100,14 +108,14 @@ export function ThreadForm(props) {
                 <div className="form-group">
                     <label htmlFor="category">Category: </label>
                     <select name="category" id="category" onChange={onInputChanged} value={currentThread.category}>
-                        {/* <option hidden disabled value=""></option> */}
+                        <option hidden disabled value=""></option>
                         {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
                     </select>
                 </div>
                 <div className="form-group">
                     <label htmlFor="parent">Topic: </label>
                     <select name="parent" id="parent" onChange={onInputChanged} value={currentThread.parent}>
-                        {/* <option hidden disabled value=""></option> */}
+                        <option hidden disabled value=""></option>
                         {topics.map(topic => <option key={topic.id} value={topic.id}>{topic.name}</option>)}
                     </select>
                 </div>

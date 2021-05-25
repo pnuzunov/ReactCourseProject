@@ -121,10 +121,10 @@
       "name": "Wilkommen!"
     },
     {
-      "id": "74299f5b-a98c-4b3b-8540-9989ced96988",
+      "id": "1a111143-c97a-424b-b0c2-cadc44a2f650",
       "open": true,
       "name": "test",
-      "parent": "01fe74c3-e460-40ef-9512-ccf01b81b57f",
+      "parent": "081f299b-9949-4b5c-8397-6c11262a718e",
       "createdBy": "05677439-4b21-4042-a857-d824d908311c",
       "category": "9fe476d4-502b-414b-8894-564cd8d4e6bd"
     }
@@ -151,6 +151,14 @@
       "postedBy": "7389a945-0615-4adb-8692-55443a97e9f3",
       "content": "Some other post",
       "datePosted": ""
+    },
+    {
+      "id": "f6300546-a24b-4e65-93db-a2fbd5235b01",
+      "content": "test",
+      "parent": "1a111143-c97a-424b-b0c2-cadc44a2f650",
+      "postedBy": "05677439-4b21-4042-a857-d824d908311c",
+      "datePosted": "2021-05-25T08:20:47.094Z",
+      "dateEdited": ""
     }
   ]
 }

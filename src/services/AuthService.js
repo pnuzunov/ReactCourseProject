@@ -1,7 +1,5 @@
 import { getUsers } from "./UserService";
 
-//const url = 'http://localhost:3000/users';
-
 export async function login(userData) {
 
     const users = (await getUsers()).data;
