@@ -63,7 +63,7 @@ export function Thread(props) {
 
     return (
         <>
-        {redirect && <Redirect to={`/topics/${currentThread.id}`}></Redirect>}
+        {redirect && <Redirect to={`/topics/${currentThread.parent}`}></Redirect>}
         <div>
             <h2>{currentThread && currentThread.name}</h2>
             {loggedUser && loggedUser.admin && <Link to={`/threads/edit/${currentThread.id}`}>Edit this thread</Link>} 

@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 import { getLoggedUser } from "../../../services/AuthService";
 import { getCategories, getThread, getTopics, saveThread } from "../../../services/ForumService";
 import { Redirect } from "react-router";
+import "../thread-form/ThreadForm.css";
+import { Link } from "react-router-dom";
 
 export function ThreadForm(props) {
     
@@ -43,11 +45,14 @@ export function ThreadForm(props) {
 
             if(props.computedMatch.params.thread) {
                 setCurrentThread({...response[2]});
+                if( !loggedUser.admin && response[2].createdBy !== loggedUser.id ) {
+                    setRedirect(true);
+                }
                 filterTopics(response[1].data, response[2].category);
             }
             
         });
-    }, [ props.computedMatch.params.thread]);
+    }, [ loggedUser.admin, loggedUser.id, props.computedMatch.params.thread]);
 
     const filterTopics = (all_topics, category) => {
         setTopics(all_topics.filter(topic => topic.parent === category));
@@ -103,18 +108,21 @@ export function ThreadForm(props) {
     return (
         <>
         {redirect && <Redirect to={`/topics/${currentThread.parent}`}></Redirect>}
+        <div className="thread-form-title">
+            <h4>{currentThread.id === "" ? "Create a new thread" : "Edit thread"}</h4>
+        </div>
         <div className="thread-form-wrapper">           
             <form className="thread-form" onSubmit={onFormSubmit}>
                 <div className="form-group">
                     <label htmlFor="category">Category: </label>
-                    <select name="category" id="category" onChange={onInputChanged} value={currentThread.category}>
+                    <select name="category" id="category" className="form-control" onChange={onInputChanged} value={currentThread.category}>
                         <option hidden disabled value=""></option>
                         {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
                     </select>
                 </div>
                 <div className="form-group">
                     <label htmlFor="parent">Topic: </label>
-                    <select name="parent" id="parent" onChange={onInputChanged} value={currentThread.parent}>
+                    <select name="parent" id="parent" className="form-control" onChange={onInputChanged} value={currentThread.parent}>
                         <option hidden disabled value=""></option>
                         {topics.map(topic => <option key={topic.id} value={topic.id}>{topic.name}</option>)}
                     </select>
@@ -137,7 +145,8 @@ export function ThreadForm(props) {
                 <div className="text-danger">
                     <span>{error.message}</span>
                 </div>}
-                <button className="btn btn-primary">Create</button>
+                <button className="btn btn-primary">{currentThread.id === "" ? "Create" : "Save changes"}</button>
+                <Link className="btn btn-disabled" to="/">Cancel</Link>
                 <div>
                 </div>                
             </form>
