@@ -31,6 +31,12 @@ export async function getThreadsByTopic(topicId) {
     return data.filter(d => d.parent === topicId);
 }
 
+export async function getThreadsByUser(userId) {
+    const data = (await axios.get(`${url}/threads`)).data;
+
+    return data.filter(d => d.createdBy === userId);
+}
+
 export async function getThreadPosts(threadId) {
     const data =  (await axios.get(`${url}/threadPosts`)).data;
 

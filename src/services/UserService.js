@@ -1,5 +1,6 @@
 import axios from "axios";
 import { v4 as uuidv4 } from 'uuid';
+import { deleteThread, getThreadsByUser } from "./ForumService";
 
 const url = 'http://localhost:3000/users';
 
@@ -22,6 +23,22 @@ export function saveUser(userData) {
     }
     return axios.put(`${url}/${userData.id}`, userData);
 }
+
+export async function deleteUser(userId) {
+    const threads = await getThreadsByUser(userId);
+
+    const deleteRequests = [];
+    threads.forEach(element => {
+        deleteRequests.push(deleteThread(element.id));
+    });
+
+    await Promise.all(deleteRequests);
+
+    return axios.delete(`${url}/${userId}`);
+}
+
+
+
 
 export async function getInvolvedUsers(threadPosts) {
     const data = (await getUsers()).data;

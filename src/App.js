@@ -19,13 +19,15 @@ function App() {
       <Header></Header>
       <Navigation></Navigation>
       <Switch>
-        <AuthenticatedRoute exact path="/users" component={UsersList} admin="true"></AuthenticatedRoute>
         <NonAuthenticatedRoute exact path="/register" component={UserForm}></NonAuthenticatedRoute>
+        <NonAuthenticatedRoute exact path="/login" component={UserLogin}></NonAuthenticatedRoute>
+
+        <AuthenticatedRoute exact path="/users" component={UsersList} admin="true"></AuthenticatedRoute>
+        <AuthenticatedRoute exact path="/users/register" component={UserForm} admin="true"></AuthenticatedRoute>
         <AuthenticatedRoute exact path="/users/edit/:user" component={UserForm} admin="true"></AuthenticatedRoute>
 
         <AuthenticatedRoute exact path="/threads/create" component={ThreadForm}></AuthenticatedRoute>
         <AuthenticatedRoute exact path="/threads/edit/:thread" component={ThreadForm} admin="true"></AuthenticatedRoute>
-        <NonAuthenticatedRoute exact path="/login" component={UserLogin}></NonAuthenticatedRoute>
 
         <Route exact path="/" component={ForumSummary}></Route>
         <Route exact path="/threads/:thread" component={Thread}></Route>
