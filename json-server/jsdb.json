@@ -20,13 +20,6 @@
       "admin": false,
       "username": "user3",
       "password": "password"
-    },
-    {
-      "id": "17b39221-84a6-47bf-8502-e19e443978c9",
-      "name": "User4",
-      "username": "user4",
-      "password": "password",
-      "admin": false
     }
   ],
   "categories": [

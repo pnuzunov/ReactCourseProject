@@ -12,6 +12,7 @@ import { UserLogin } from './components/users-components/user-login/UserLogin';
 import { Thread } from './components/threads-components/thread/Thread';
 import { ThreadForm } from './components/threads-components/thread-form/ThreadForm';
 import { UserForm } from './components/users-components/user-form/UserForm';
+import { UserDetails } from './components/users-components/user-details/UserDetails';
 
 function App() {
   return (
@@ -23,11 +24,12 @@ function App() {
         <NonAuthenticatedRoute exact path="/login" component={UserLogin}></NonAuthenticatedRoute>
 
         <AuthenticatedRoute exact path="/users" component={UsersList} admin="true"></AuthenticatedRoute>
+        <AuthenticatedRoute exact path="/users/:user" component={UserDetails} sameUser="true"></AuthenticatedRoute>
         <AuthenticatedRoute exact path="/users/register" component={UserForm} admin="true"></AuthenticatedRoute>
         <AuthenticatedRoute exact path="/users/edit/:user" component={UserForm} admin="true"></AuthenticatedRoute>
 
         <AuthenticatedRoute exact path="/threads/create" component={ThreadForm}></AuthenticatedRoute>
-        <AuthenticatedRoute exact path="/threads/edit/:thread" component={ThreadForm} admin="true"></AuthenticatedRoute>
+        <AuthenticatedRoute exact path="/threads/edit/:thread" component={ThreadForm} admin="true" sameUser="true"></AuthenticatedRoute>
 
         <Route exact path="/" component={ForumSummary}></Route>
         <Route exact path="/threads/:thread" component={Thread}></Route>

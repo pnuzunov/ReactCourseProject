@@ -8,7 +8,11 @@ export function AuthenticatedRoute(props) {
         return <props.component {...props} />;
     }
 
-    if (!props.admin && user) {
+    if(props.sameUser && user && user.id === props.computedMatch.params.user) {
+        return <props.component {...props} />;
+    }
+
+    if (!props.admin && !props.sameUser && user) {
         return <props.component {...props} />;
     }
 

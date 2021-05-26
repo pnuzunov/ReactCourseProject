@@ -66,8 +66,8 @@ export function Thread(props) {
         {redirect && <Redirect to={`/topics/${currentThread.parent}`}></Redirect>}
         <div>
             <h2>{currentThread && currentThread.name}</h2>
-            {loggedUser && loggedUser.admin && <Link to={`/threads/edit/${currentThread.id}`}>Edit this thread</Link>} 
-            {loggedUser && loggedUser.admin && <span onClick={onDeleteThread}> | Delete this thread</span>}
+            {loggedUser && (loggedUser.admin || currentThread.createdBy === loggedUser.id) && <Link to={`/threads/edit/${currentThread.id}`}>Edit this thread</Link>} 
+            {loggedUser && (loggedUser.admin || currentThread.createdBy === loggedUser.id) && <span onClick={onDeleteThread}> | Delete this thread</span>}
             {threadPosts
             .sort((a,b) => a.datePosted > b.datePosted ? 1 : -1)
             .map(tp =>
