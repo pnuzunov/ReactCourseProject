@@ -44,15 +44,15 @@ export function Thread(props) {
     }
 
     const onCreatePost = (e) => {
-        if(e.code === 'Enter') {
+        if(!e || (e && e.code === 'Enter')) {
             saveThreadPost(newThreadPost).then(_ => {
                 getThreadPosts(currentThread.id).then((data) => {
                     setThreadPosts(data);
-                    e.target.value = '';
                 })
 
                 setNewThreadPost((prevState) => ({
                     ...prevState,
+                    content: '',
                     id: ''
                 }))
             });
@@ -99,12 +99,14 @@ export function Thread(props) {
                             onPostDelete={handlePostDelete} >
                 </ThreadPost>
             ) }
-            {loggedUser && currentThread && currentThread.open 
+            {loggedUser && currentThread && (currentThread.open || newThreadPost.id !== '')
                 &&  <div>
                         <textarea value={newThreadPost.content} onChange={onInputChanged} onKeyPress={onCreatePost}>
 
                         </textarea>
-                        {newThreadPost && newThreadPost.id !== '' && <button className="btn btn-primary d-block m-auto" onClick={resetThreadPost} >Reset</button>}
+                        <button className="btn btn-primary d-block m-auto" onClick={() => onCreatePost(null)}>Post</button>
+                        {newThreadPost && newThreadPost.id !== ''
+                            && <button className="btn btn-disabled d-block m-auto" onClick={resetThreadPost}>Reset</button>}
                     </div> }
             {currentThread && !currentThread.open && <p>This thread is closed. You cannot make new posts here.</p>}
             {!loggedUser && currentThread && currentThread.open && <p>Please <Link to="/login">sign in </Link> to make a new post.</p>}
