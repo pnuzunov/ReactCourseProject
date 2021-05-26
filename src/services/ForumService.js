@@ -43,11 +43,16 @@ export async function getThreadPosts(threadId) {
     return data.filter(d => d.parent === threadId);
 }
 
+export async function getThreadPostsByUser(userId) {
+    const data =  (await axios.get(`${url}/threadPosts`)).data;
+
+    return data.filter(d => d.postedBy === userId);
+}
 
 export function saveThreadPost(postData) {
+    const now = new Date();
     if(postData.id === '') {
         const newUuid = uuidv4();
-        const now = new Date();
 
         postData = {
             ...postData,
@@ -57,6 +62,10 @@ export function saveThreadPost(postData) {
 
         return axios.post(`${url}/threadPosts`, postData)
     }
+    postData = {
+        ...postData,
+        dateEdited: now
+    };
     return axios.put(`${url}/threadPosts/${postData.id}`, postData)
 }
 

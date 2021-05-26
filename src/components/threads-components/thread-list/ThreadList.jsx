@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useEffect } from "react"
+import { Link } from "react-router-dom";
 import { getThreadsByTopic } from "../../../services/ForumService";
 import { ThreadListItem } from "../thread-list-item/ThreadListItem";
 
@@ -15,7 +16,12 @@ export function ThreadList(props) {
 
     return (
         <div>
-            {threads.length === 0 && <h4>No threads in this topic.</h4>}
+            {threads.length === 0 && 
+            <div>
+                <h4>No threads in this topic.</h4>
+                <p><Link to="/threads/create">Create</Link> a new thread</p>
+            </div>
+            }
             { threads.map(t => <ThreadListItem key={t.name} id={t.id} name={t.name}></ThreadListItem> ) }
         </div>
     )

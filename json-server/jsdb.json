@@ -20,6 +20,13 @@
       "admin": false,
       "username": "user3",
       "password": "password"
+    },
+    {
+      "id": "70ae5da4-cbf5-4fad-8a04-7131eac1b81b",
+      "name": "newUser",
+      "username": "newUser",
+      "password": "password",
+      "admin": false
     }
   ],
   "categories": [
@@ -119,6 +126,14 @@
       "parent": "8d7b7367-2443-4dee-99da-e43d628b044e",
       "createdBy": "7389a945-0615-4adb-8692-55443a97e9f3",
       "name": "Wilkommen!"
+    },
+    {
+      "id": "818feafc-f9cf-4dbe-97ed-e07185b3bf9a",
+      "open": true,
+      "name": "newUser's Thread",
+      "parent": "59aa4851-a93f-42a8-97d0-54353a3619a2",
+      "createdBy": "70ae5da4-cbf5-4fad-8a04-7131eac1b81b",
+      "category": "b6e198d4-40a8-4470-8e5e-8065bf3d649d"
     }
   ],
   "threadPosts": [
@@ -127,22 +142,44 @@
       "parent": "963881d8-048d-43d4-a8e1-133da3a8d360",
       "postedBy": "05677439-4b21-4042-a857-d824d908311c",
       "content": "First post",
-      "datePosted": "",
-      "dateEdited": ""
+      "datePosted": "2021-05-26T12:56:42.599Z"
     },
     {
       "id": "2",
       "parent": "963881d8-048d-43d4-a8e1-133da3a8d360",
       "postedBy": "7389a945-0615-4adb-8692-55443a97e9f3",
       "content": "Second post",
-      "datePosted": ""
+      "datePosted": "2021-05-26T12:56:42.599Z",
+      "dateEdited": "2021-05-26T12:58:42.599Z"
     },
     {
       "id": "3",
       "parent": "2e6fac7d-f79c-47ad-bfde-059a2b567b24",
       "postedBy": "7389a945-0615-4adb-8692-55443a97e9f3",
       "content": "Some other post",
-      "datePosted": ""
+      "datePosted": "2021-05-26T12:56:42.599Z"
+    },
+    {
+      "id": "4ed5cb9f-cf68-4e78-897b-e91402d0e23c",
+      "content": "newUser post1",
+      "parent": "818feafc-f9cf-4dbe-97ed-e07185b3bf9a",
+      "postedBy": "70ae5da4-cbf5-4fad-8a04-7131eac1b81b",
+      "datePosted": "2021-05-26T13:24:41.505Z"
+    },
+    {
+      "id": "547c0778-d33f-4556-9302-f0bcc7271cc6",
+      "content": "newUser post 2",
+      "parent": "818feafc-f9cf-4dbe-97ed-e07185b3bf9a",
+      "postedBy": "70ae5da4-cbf5-4fad-8a04-7131eac1b81b",
+      "datePosted": "2021-05-26T13:24:44.514Z"
+    },
+    {
+      "id": "1b3c0153-9802-4efd-af15-0d0f0aa90998",
+      "content": "newUser post3",
+      "parent": "818feafc-f9cf-4dbe-97ed-e07185b3bf9a",
+      "postedBy": "70ae5da4-cbf5-4fad-8a04-7131eac1b81b",
+      "datePosted": "2021-05-26T13:24:49.251Z",
+      "dateEdited": "2021-05-26T13:26:27.967Z"
     }
   ]
 }

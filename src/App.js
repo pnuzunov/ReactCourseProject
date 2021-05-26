@@ -29,7 +29,7 @@ function App() {
         <AuthenticatedRoute exact path="/users/edit/:user" component={UserForm} admin="true"></AuthenticatedRoute>
 
         <AuthenticatedRoute exact path="/threads/create" component={ThreadForm}></AuthenticatedRoute>
-        <AuthenticatedRoute exact path="/threads/edit/:thread" component={ThreadForm} admin="true" sameUser="true"></AuthenticatedRoute>
+        <AuthenticatedRoute exact path="/threads/edit/:thread" component={ThreadForm}></AuthenticatedRoute>
 
         <Route exact path="/" component={ForumSummary}></Route>
         <Route exact path="/threads/:thread" component={Thread}></Route>

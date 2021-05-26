@@ -45,9 +45,9 @@ export function ThreadForm(props) {
 
             if(props.computedMatch.params.thread) {
                 setCurrentThread({...response[2]});
-                // if( !loggedUser.admin && response[2].createdBy !== loggedUser.id ) {
-                //     setRedirect(true);
-                // }
+                if( !loggedUser.admin && response[2].createdBy !== loggedUser.id ) {
+                    setRedirect(true);
+                }
                 filterTopics(response[1].data, response[2].category);
             }
             

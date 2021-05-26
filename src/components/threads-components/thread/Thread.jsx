@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { deleteThread, getThread, getThreadPosts, saveThreadPost } from "../../../services/ForumService";
+import { deleteThread, deleteThreadPost, getThread, getThreadPosts, saveThreadPost } from "../../../services/ForumService";
 import { getUsers } from "../../../services/UserService";
 import { getLoggedUser } from "../../../services/AuthService";
 import { ThreadPost } from "../thread-post/ThreadPost";
@@ -45,14 +45,35 @@ export function Thread(props) {
 
     const onCreatePost = (e) => {
         if(e.code === 'Enter') {
-            e.target.value = '';
             saveThreadPost(newThreadPost).then(_ => {
                 getThreadPosts(currentThread.id).then((data) => {
                     setThreadPosts(data);
+                    e.target.value = '';
                 })
+
+                setNewThreadPost((prevState) => ({
+                    ...prevState,
+                    id: ''
+                }))
             });
         }
         
+    }
+
+    const handlePostEdit = (threadPost) => {
+        setNewThreadPost({...threadPost});
+    }
+
+    const handlePostDelete = (threadPostId) => {
+        deleteThreadPost(threadPostId).then(_ => {
+            getThreadPosts(currentThread.id).then((data) => {
+                setThreadPosts(data);
+            })
+        })
+    }
+
+    const resetThreadPost = () => {
+        setNewThreadPost({id: '', content: '', parent: currentThread.id, postedBy: loggedUser?.id});
     }
 
     const onDeleteThread = () => {
@@ -71,14 +92,19 @@ export function Thread(props) {
             {threadPosts
             .sort((a,b) => a.datePosted > b.datePosted ? 1 : -1)
             .map(tp =>
-                <ThreadPost key={tp.id} user={users.find(user => user.id === tp.postedBy)} threadPost={tp}>
+                <ThreadPost key={tp.id}
+                            user={users.find(user => user.id === tp.postedBy)}
+                            threadPost={tp}
+                            onPostEdit={handlePostEdit}
+                            onPostDelete={handlePostDelete} >
                 </ThreadPost>
             ) }
             {loggedUser && currentThread && currentThread.open 
                 &&  <div>
-                        <textarea onChange={onInputChanged} onKeyPress={onCreatePost}>
+                        <textarea value={newThreadPost.content} onChange={onInputChanged} onKeyPress={onCreatePost}>
 
                         </textarea>
+                        {newThreadPost && newThreadPost.id !== '' && <button className="btn btn-primary d-block m-auto" onClick={resetThreadPost} >Reset</button>}
                     </div> }
             {currentThread && !currentThread.open && <p>This thread is closed. You cannot make new posts here.</p>}
             {!loggedUser && currentThread && currentThread.open && <p>Please <Link to="/login">sign in </Link> to make a new post.</p>}
