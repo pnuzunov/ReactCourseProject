@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getCategories, getTopics } from "../../../services/ForumService";
 import { ForumCategory } from "../forum-category/ForumCategory";
+import "../../../index.css"
 
 export function ForumSummary() {
     const [categories, setCategories] = useState([]);
@@ -25,8 +26,8 @@ export function ForumSummary() {
     });
 
     return (
-        <div>
-            <Link className="d-flex" to="/threads/create">Create a thread</Link>
+        <div className="max-height">
+            <Link className="d-flex m-3" to="/threads/create">Create a thread</Link>
             {categories.map(category => <ForumCategory categoryId={category.id} name={category.name} topics={topicsMapped[category.name]} key={category.id}></ForumCategory> )}
         </div>
     )

@@ -3,6 +3,7 @@ import { getLoggedUser } from "../../../services/AuthService";
 import { getCategories, getThread, getTopics, saveThread } from "../../../services/ForumService";
 import { Redirect } from "react-router";
 import "../thread-form/ThreadForm.css";
+import "../../../index.css";
 import { Link } from "react-router-dom";
 
 export function ThreadForm(props) {
@@ -111,7 +112,7 @@ export function ThreadForm(props) {
         <div className="thread-form-title">
             <h4>{currentThread.id === "" ? "Create a new thread" : "Edit thread"}</h4>
         </div>
-        <div className="thread-form-wrapper">           
+        <div className="thread-form-wrapper max-height">           
             <form className="thread-form" onSubmit={onFormSubmit}>
                 <div className="form-group">
                     <label htmlFor="category">Category: </label>

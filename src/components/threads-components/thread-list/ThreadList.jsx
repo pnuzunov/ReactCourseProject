@@ -1,21 +1,31 @@
 import { useState } from "react";
 import { useEffect } from "react"
 import { Link } from "react-router-dom";
-import { getThreadsByTopic } from "../../../services/ForumService";
+import { getThreadsByTopic, getTopic } from "../../../services/ForumService";
 import { ThreadListItem } from "../thread-list-item/ThreadListItem";
+import "../../../index.css";
 
 export function ThreadList(props) {
 
+    const [topic, setTopic] = useState({});
     const [threads, setThreads] = useState([]);
 
     useEffect(_ => {
-        getThreadsByTopic(props.match.params.topic).then(response => {
-            setThreads(response);
-        })
+        if(props.match.params.topic) {
+            getTopic(props.match.params.topic).then((response) => {
+                setTopic(response.data);
+            })
+
+            getThreadsByTopic(props.match.params.topic).then(response => {
+                setThreads(response);
+            })
+        }
+
     }, [props.match.params.topic]);
 
     return (
-        <div>
+        <div className="max-height m-3">
+            <h2 className="m-3">{topic.name}</h2>
             {threads.length === 0 && 
             <div>
                 <h4>No threads in this topic.</h4>

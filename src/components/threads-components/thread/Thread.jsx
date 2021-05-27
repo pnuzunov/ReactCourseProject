@@ -4,6 +4,7 @@ import { getUsers } from "../../../services/UserService";
 import { getLoggedUser } from "../../../services/AuthService";
 import { ThreadPost } from "../thread-post/ThreadPost";
 import { Link, Redirect } from "react-router-dom";
+import "../../../index.css";
 
 export function Thread(props) {
 
@@ -85,7 +86,7 @@ export function Thread(props) {
     return (
         <>
         {redirect && <Redirect to={`/topics/${currentThread.parent}`}></Redirect>}
-        <div>
+        <div className="max-height">
             <h2>{currentThread && currentThread.name}</h2>
             {loggedUser && (loggedUser.admin || currentThread.createdBy === loggedUser.id) && <Link to={`/threads/edit/${currentThread.id}`}>Edit this thread</Link>} 
             {loggedUser && (loggedUser.admin || currentThread.createdBy === loggedUser.id) && <span onClick={onDeleteThread}> | Delete this thread</span>}

@@ -3,6 +3,7 @@ import { Redirect } from "react-router";
 import { Link } from "react-router-dom";
 import { getLoggedUser } from "../../../services/AuthService";
 import { deleteUser, getUser } from "../../../services/UserService";
+import "../../../index.css";
 
 export function UserDetails(props) {
 
@@ -34,13 +35,13 @@ export function UserDetails(props) {
     return (
         <>
         {redirect && <Redirect to="/users"></Redirect>}
-        <div>
+        <div className="max-height">
             <div>
                 <span>Name: </span>
                 <span>{user && user.name}</span>
             </div>
-            {loggedUser && loggedUser.admin && user && <button className="btn btn-success"><Link style={linkStyle} to={`/users/edit/${user.id}`}>Edit</Link></button>}
-            {loggedUser && loggedUser.admin && <div> <button className="btn btn-danger" onClick={onUserDelete}>Disable account</button></div>}
+            {loggedUser && user && (loggedUser.admin || loggedUser.id === user.id) && <button className="btn btn-success"><Link style={linkStyle} to={`/users/edit/${user.id}`}>Edit</Link></button>}
+            {loggedUser && user && (loggedUser.admin || loggedUser.id === user.id) && <div> <button className="btn btn-danger" onClick={onUserDelete}>Delete account</button></div>}
         </div>
         </>
     )
