@@ -20,13 +20,6 @@
       "admin": false,
       "username": "user3",
       "password": "password"
-    },
-    {
-      "id": "70ae5da4-cbf5-4fad-8a04-7131eac1b81b",
-      "name": "newUser",
-      "username": "newUser",
-      "password": "password",
-      "admin": false
     }
   ],
   "categories": [
@@ -113,7 +106,7 @@
     },
     {
       "id": "78e39360-0c74-4507-b9d6-22c35c55f43d",
-      "open": true,
+      "open": false,
       "category": "9fe476d4-502b-414b-8894-564cd8d4e6bd",
       "parent": "081f299b-9949-4b5c-8397-6c11262a718e",
       "createdBy": "05677439-4b21-4042-a857-d824d908311c",
@@ -126,14 +119,6 @@
       "parent": "8d7b7367-2443-4dee-99da-e43d628b044e",
       "createdBy": "7389a945-0615-4adb-8692-55443a97e9f3",
       "name": "Wilkommen!"
-    },
-    {
-      "id": "818feafc-f9cf-4dbe-97ed-e07185b3bf9a",
-      "open": true,
-      "name": "newUser's Thread",
-      "parent": "0e9f4c82-f173-4302-aeeb-c2395b7d7423",
-      "createdBy": "70ae5da4-cbf5-4fad-8a04-7131eac1b81b",
-      "category": "9fe476d4-502b-414b-8894-564cd8d4e6bd"
     }
   ],
   "threadPosts": [
@@ -158,36 +143,6 @@
       "postedBy": "7389a945-0615-4adb-8692-55443a97e9f3",
       "content": "Some other post",
       "datePosted": "2021-05-26T12:56:42.599Z"
-    },
-    {
-      "id": "4ed5cb9f-cf68-4e78-897b-e91402d0e23c",
-      "content": "newUser post1",
-      "parent": "818feafc-f9cf-4dbe-97ed-e07185b3bf9a",
-      "postedBy": "70ae5da4-cbf5-4fad-8a04-7131eac1b81b",
-      "datePosted": "2021-05-26T13:24:41.505Z"
-    },
-    {
-      "id": "547c0778-d33f-4556-9302-f0bcc7271cc6",
-      "content": "newUser post 2",
-      "parent": "818feafc-f9cf-4dbe-97ed-e07185b3bf9a",
-      "postedBy": "70ae5da4-cbf5-4fad-8a04-7131eac1b81b",
-      "datePosted": "2021-05-26T13:24:44.514Z"
-    },
-    {
-      "id": "1b3c0153-9802-4efd-af15-0d0f0aa90998",
-      "content": "newUser post333",
-      "parent": "818feafc-f9cf-4dbe-97ed-e07185b3bf9a",
-      "postedBy": "70ae5da4-cbf5-4fad-8a04-7131eac1b81b",
-      "datePosted": "2021-05-26T13:24:49.251Z",
-      "dateEdited": "2021-05-26T13:37:46.838Z"
-    },
-    {
-      "id": "ae1448f8-62eb-45ae-8ddb-53d816ad708f",
-      "content": "newUser post 4",
-      "parent": "818feafc-f9cf-4dbe-97ed-e07185b3bf9a",
-      "postedBy": "70ae5da4-cbf5-4fad-8a04-7131eac1b81b",
-      "datePosted": "2021-05-26T13:37:57.124Z",
-      "dateEdited": "2021-05-26T13:38:02.614Z"
     }
   ]
 }
